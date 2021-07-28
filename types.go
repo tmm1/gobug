@@ -12,8 +12,6 @@ type typeInfo struct {
 
 type fieldInfo struct {
 	index []int
-	kind  reflect.Kind
-	ekind reflect.Kind
 }
 
 var types sync.Map // reflect.Type -> *typeInfo
@@ -55,14 +53,11 @@ func (ti *typeInfo) addFields(t reflect.Type, prefix string, prefixIdx []int) {
 		name := f.Name
 		finfo := &fieldInfo{
 			index: append(prefixIdx, f.Index...),
-			kind:  f.Type.Kind(),
 		}
 
 		switch f.Type.Kind() {
 		case reflect.String:
 			ti.fields[prefix+name] = finfo
-		case reflect.Slice, reflect.Array:
-			finfo.ekind = f.Type.Elem().Kind()
 		}
 	}
 }
