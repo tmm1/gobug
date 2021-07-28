@@ -1,3 +1,5 @@
+for https://github.com/golang/go/issues/47447
+
 ```
 $ go test -v ./
 === RUN   TestTypeInfo
