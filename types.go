@@ -53,8 +53,11 @@ func (ti *typeInfo) addFields(t reflect.Type, prefix string, prefixIdx []int) {
 		}
 
 		name := f.Name
+		idx := []int{}
+		idx = append(idx, prefixIdx...)
+		idx = append(idx, f.Index...)
 		finfo := &fieldInfo{
-			index: append(prefixIdx, f.Index...),
+			index:  idx,
 			kind:  f.Type.Kind(),
 		}
 
